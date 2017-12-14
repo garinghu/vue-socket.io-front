@@ -3,16 +3,21 @@
     <transition :name="transitionName">
       <router-view class="view"/>
     </transition>
+    <common-footer></common-footer>
   </div>
 </template>
 
 <script>
+import CommonFooter from './components/common/Footer'
 export default {
   name: 'app',
   data () {
     return {
       transitionName: 'slide-left'  
     }
+  },
+  components: {
+    CommonFooter
   },
   watch: {
 　　　'$route' (to, from) {
