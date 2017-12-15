@@ -47,6 +47,7 @@ export default {
   },
   methods: {
       login () {
+          
           if(this.username==false || this.password==false){
               this.errorText = '请输入用户名或密码'
           }else{

@@ -1,12 +1,11 @@
 <template>
   <div>
     <common-header>
-      <span slot="title">我的</span>
+      <span slot="title">好友</span>
     </common-header>
 
-    <div>我的</div>
+    <div>好友</div>
   </div>
-   
 </template>
 
 <script>

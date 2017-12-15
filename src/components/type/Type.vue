@@ -1,12 +1,11 @@
 <template>
   <div>
     <common-header>
-      <span slot="title">我的</span>
+      <span slot="title">动态</span>
     </common-header>
 
-    <div>我的</div>
-  </div>
-   
+    <div>动态</div>
+  </div>   
 </template>
 
 <script>

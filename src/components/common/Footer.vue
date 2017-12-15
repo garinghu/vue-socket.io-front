@@ -38,16 +38,19 @@ export default {
      this.showFriend = false;
      this.showType = true;
      this.showMy = true;
+     this.$router.push({path:'/friends'})
    },
    toType () {
      this.showFriend = true;
      this.showType = false;
      this.showMy = true;
+     this.$router.push({path:'/type'})
    },
    toMy () {
      this.showFriend = true;
      this.showType = true;
      this.showMy = false;
+     this.$router.push({path:'/user'})
    }
   }
 }
