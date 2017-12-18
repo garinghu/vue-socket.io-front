@@ -1,9 +1,12 @@
 <template>
-  <div id="app">
-    <transition :name="transitionName">
+  <div id="app" :style="note">
+    <transition :name="transitionName"
+    v-on:enter="enter">
       <router-view class="view"/>
     </transition>
-    <common-footer v-if="showFooter" class="test"></common-footer>
+    <transition name="fold">
+      <common-footer v-if="showFooter" class="example"></common-footer>
+    </transition>
   </div>
 </template>
 
@@ -14,11 +17,17 @@ export default {
   data () {
     return {
       transitionName: 'slide-left',
-      showFooter: true  
+      showFooter: true,
+      note:{}
     }
   },
   components: {
     CommonFooter
+  },
+  methods: {
+    enter () {
+      this.note = {overflow: 'hidden'}
+    }
   },
   mounted () {
     if(this.$route.path == '/'){
@@ -27,19 +36,22 @@ export default {
   },
   watch: {
 　　　'$route' (to, from) {
-        
         var fromStr = from.path;
         var toStr = to.path;
-        if(toStr == '/' || toStr == '/regist'){
+        if(toStr == '/' || toStr == '/regist' || toStr == '/userinfo' || toStr == '/changeinfo'){
           this.showFooter = false
         }else{
           this.showFooter = true
         }
-　　　　　　if(fromStr.indexOf(toStr)) {
-　　　　　　　　this.transitionName = 'slide-left'
-　　　　　　} else {
-　　　　　　   this.transitionName = 'slide-right'
-　　　　　}
+        if(toStr == '/changeinfo'){
+          this.transitionName = 'slide-top'
+        }else if(fromStr == '/changeinfo'){
+          this.transitionName = 'slide-bottom'
+        }else if(fromStr.indexOf(toStr)) {
+　　　　　　　this.transitionName = 'slide-left'
+　　　　 }else{
+　　　　　　  this.transitionName = 'slide-right'
+　　　　 }
 　　  }
   }
 }
@@ -51,8 +63,14 @@ export default {
   padding: 0;
 }
 #app{
-  width: 100%;
-  height: 100%;
+ position: absolute;
+ top: 0;
+ left: 0;
+ bottom: 0;
+ right: 0;
+overflow-x: hidden;
+ background: #ebeef5;
+ color:#606266;
 }
 .view{
   position: absolute;
@@ -60,23 +78,42 @@ export default {
   left: 0;
   right: 0;
   bottom: 1.5rem;
-  transition: all .4s;
+  transition: all .4s ease-in-out;
   overflow: hidden;
+  background: #ebeef5;
 }
-/* .test{
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-} */
 
 .slide-left-enter, .slide-right-leave-active {  
-  /* transform: translate(100%, 0); */
-  left: 100%;
-  opacity: 0;
+  transform: translate(100%, 0);
 }  
 .slide-left-leave-active, .slide-right-enter {   
-  /* transform: translate(-100%, 0); */
-  right: 100%;
-  opacity: 0;
-}  
+  transform: translate(-100%, 0);
+}
+
+.slide-top-enter-active, .slide-top-leave-active {
+    transform: translate(0,0);
+}
+.slide-top-enter, .slide-top-leave {
+    transform: translate(0, 100%);
+}
+
+.slide-bottom-enter-active, .slide-bottom-leave-active {
+    transform: translate(0,0);
+}
+.slide-bottom-enter, .slide-bottom-leave {
+    transform: translate(0, -100%);
+}
+
+
+
+
+.example {
+    transition: all .4s;
+}
+.fold-enter-active, .fold-leave-active {
+    opacity: 1;
+}
+.fold-enter, .fold-leave-active {
+    opacity: 0;
+}
 </style>

@@ -5,6 +5,8 @@ import MyRegist from '@/components/my/MyRegist.vue'
 import User from '@/components/user/User.vue'
 import Friends from '@/components/friends/Friends.vue'
 import Type from '@/components/type/Type.vue'
+import UserInfo from '@/components/user/UserInfo.vue'
+import ChangeInfo from '@/components/common/ChangeInfo.vue'
 
 Vue.use(Router)
 
@@ -34,6 +36,16 @@ export default new Router({
       path: '/type',
       name: 'Type',
       component: Type
-    }
+    },
+    {
+      path: '/userinfo',
+      name: 'UserInfo',
+      component: UserInfo
+    },
+    {
+      path: '/changeinfo',
+      name: 'ChangeInfo',
+      component: ChangeInfo
+    },
   ]
 })

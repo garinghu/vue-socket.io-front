@@ -1,6 +1,6 @@
 <template>
   <div class="containt">
-      <common-header bg="#409EFF" backShow=''>
+      <common-header bg="#409EFF" backShow='1'>
         <span slot="title">注册</span>
       </common-header>
       
@@ -60,7 +60,7 @@ export default {
                     if(res.data == '注册成功'){
                         console.log('成功')
                          localStorage.setItem('username',this.username);
-                         console.log(localStorage.getItem('username'))
+                         this.$router.push({path:'/user'})
                     }else{
                         this.errText = '用户名已存在'
                     }
@@ -113,6 +113,8 @@ button{
     left: 50%;
     transform:translateX(-50%);
 }
-
+input{
+    background: none;
+}
   
 </style>

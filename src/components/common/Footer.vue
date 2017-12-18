@@ -59,13 +59,13 @@ export default {
 <style scoped>
 .footer{
   width: 100%;
-  height: 1.5rem;
+  height: 1.2rem;
   position:fixed;
   bottom: 0;
   background: #fff;
   display: flex;
   flex-direction: row;
-  border-top: 1px solid #909399;
+  border-top: 1px solid #DCDFE6;
   color:#606266;
 }
 .footer>div{
@@ -73,7 +73,7 @@ export default {
   text-align: center;
 }
 .footer>div img{
-  width: 0.9rem;
+  width: 0.6rem;
   border:none;
 }
 .select{

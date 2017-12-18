@@ -57,9 +57,12 @@ export default {
               password: this.password
                 })
                 .then((res) => {
-                    if(res.data == '成功'){
-                        console.log('成功')
-                         localStorage.setItem('username',this.username);
+                    if(res.data != '密码错误' && res.data != '账号不存在'){
+                        console.log(res);
+                         localStorage.setItem('username',res.data.username);
+                         localStorage.setItem('name',res.data.name);
+                         localStorage.setItem('signature',res.data.signature);
+                         localStorage.setItem('head',res.data.head);
                          console.log(localStorage.getItem('username'));
                          this.$router.push({path:'/user'})
                     }else if(res.data == '密码错误'){
@@ -123,5 +126,7 @@ button{
     left: 50%;
     transform:translateX(-50%);
 }
-  
+input{
+    background:none;
+}
 </style>

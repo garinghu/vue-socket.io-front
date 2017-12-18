@@ -1,7 +1,7 @@
 <template>
   <div>
      <div class="header" :style="{background:bg}">
-        <div v-if="backShow">
+        <div v-if="backShow" @click="goBack">
             <img src="../../assets/svg/back.svg" alt="" class="img">
         </div>
         <h2 class="title">
@@ -15,14 +15,20 @@
 
 <script>
 export default {
-  props: ['bg', 'backShow'],
+  props: ['bg', 'backShow','to'],
   data () {
       return {
           back: false
       }
   },
   methods: {
-   
+    goBack () {
+      if(this.to){
+          this.$router.push({path: this.to})
+      }else{
+        history.back()
+      }
+    }
   },
   mounted () {
       
