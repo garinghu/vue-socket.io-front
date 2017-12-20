@@ -59,6 +59,7 @@ export default {
                 .then((res) => {
                     if(res.data != '密码错误' && res.data != '账号不存在'){
                         console.log(res);
+                        localStorage.setItem('userid',res.data.Id);
                          localStorage.setItem('username',res.data.username);
                          localStorage.setItem('name',res.data.name);
                          localStorage.setItem('signature',res.data.signature);

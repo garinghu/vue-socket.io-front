@@ -38,14 +38,14 @@ export default {
 　　　'$route' (to, from) {
         var fromStr = from.path;
         var toStr = to.path;
-        if(toStr == '/' || toStr == '/regist' || toStr == '/userinfo' || toStr == '/changeinfo'){
+        if(toStr == '/' || toStr == '/regist' || toStr == '/userinfo' || toStr == '/changeinfo' || toStr == '/addtype'){
           this.showFooter = false
         }else{
           this.showFooter = true
         }
-        if(toStr == '/changeinfo'){
+        if(toStr == '/changeinfo' || toStr == '/addtype'){
           this.transitionName = 'slide-top'
-        }else if(fromStr == '/changeinfo'){
+        }else if(fromStr == '/changeinfo'|| fromStr == '/addtype'){
           this.transitionName = 'slide-bottom'
         }else if(fromStr.indexOf(toStr)) {
 　　　　　　　this.transitionName = 'slide-left'

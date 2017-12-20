@@ -7,6 +7,7 @@ import Friends from '@/components/friends/Friends.vue'
 import Type from '@/components/type/Type.vue'
 import UserInfo from '@/components/user/UserInfo.vue'
 import ChangeInfo from '@/components/common/ChangeInfo.vue'
+import AddType from '@/components/common/AddType.vue'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/changeinfo',
       name: 'ChangeInfo',
       component: ChangeInfo
+    },
+    {
+      path: '/addtype',
+      name: 'AddType',
+      component: AddType
     },
   ]
 })
