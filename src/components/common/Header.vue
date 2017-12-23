@@ -44,6 +44,7 @@ export default {
   top: 0;
   width: 100%;
   line-height: 1rem;
+  z-index:100;
 }
 .title{
   position: absolute;

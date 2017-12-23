@@ -67,6 +67,7 @@ export default {
   flex-direction: row;
   border-top: 1px solid #DCDFE6;
   color:#606266;
+  overflow: hidden;
 }
 .footer>div{
   flex:1;

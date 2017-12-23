@@ -1,7 +1,8 @@
 <template>
   <div id="app" :style="note">
     <transition :name="transitionName"
-    v-on:enter="enter">
+    v-on:enter="enter"
+    v-on:enter-cancelled="enterCancelled">
       <router-view class="view"/>
     </transition>
     <transition name="fold">
@@ -27,6 +28,9 @@ export default {
   methods: {
     enter () {
       this.note = {overflow: 'hidden'}
+    },
+    enterCancelled () {
+      this.note = {overflowX: 'hidden'}
     }
   },
   mounted () {
@@ -77,9 +81,9 @@ overflow-x: hidden;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 1.5rem;
+  bottom: 1rem;
   transition: all .4s ease-in-out;
-  overflow: hidden;
+  overflow-x: hidden;
   background: #ebeef5;
 }
 

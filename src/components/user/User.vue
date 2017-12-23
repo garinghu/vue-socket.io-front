@@ -43,13 +43,13 @@
           </div>
 
           <div class="exchange">
-            <img src="../../assets/svg/commit.svg" alt="">
-            <img src="../../assets/svg/good.svg" alt="">
+            <img src="../../assets/svg/commit.svg" alt="" @click='addCommit(item,index)'>
+            <img :src="item.gooded?goodSelect:good" alt="" @click='addGood(item,index)'>
           </div>
 
           <div class="goods">
             <img src="../../assets/svg/goods.svg" alt="">
-            <span>我，又是我，还是我</span>
+            <span v-for="(good, index) in item.good" :key="good.Id">{{ good.name }}，</span>
           </div>
 
           <div class="commit">
@@ -74,6 +74,8 @@ export default {
       username: localStorage.getItem('username'),
       head: localStorage.getItem('head'),
       myTypeList: [],
+      good:require('../../assets/svg/good.svg'),
+      goodSelect:require('../../assets/svg/good-select.svg')
     }
   },
   components: {
@@ -85,9 +87,16 @@ export default {
               userid:localStorage.getItem('userid')
                 })
                 .then((res) => {
+                  console.log(res);
                   this.myTypeList = res.data.reverse();
                   for(var x in this.myTypeList){
                     this.myTypeList[x].date = this.formatDate(this.myTypeList[x].date);
+                    this.myTypeList[x]['gooded'] = false;
+                    for(let y in this.myTypeList[x].good){
+                      if(this.myTypeList[x].good[y].userid == localStorage.getItem('userid')){
+                        this.myTypeList[x]['gooded'] = true;
+                      }
+                    }
                   }
                 })
   },
@@ -117,6 +126,42 @@ export default {
     },
     toAddType () {
       this.$router.push({path:'/addtype'})
+    },
+    addGood (type, index) {
+       if(!this.myTypeList[index].gooded){
+         this.myTypeList[index].gooded = true;
+         this.myTypeList[index].good.push({
+           name: localStorage.getItem('name'),
+           userid: localStorage.getItem('userid')
+         })
+          Axios.post('http://localhost:3000/addgood',{
+        typeid:type.Id,
+        userid:localStorage.getItem('userid'),
+        name:localStorage.getItem('name')
+          })
+          .then((res) => {
+            console.log(res);
+          })
+       }
+      
+    },
+    addCommit (type, index) {
+       if(!this.myTypeList[index].gooded){
+         this.myTypeList[index].gooded = true;
+         this.myTypeList[index].good.push({
+           name: localStorage.getItem('name'),
+           userid: localStorage.getItem('userid')
+         })
+          Axios.post('http://localhost:3000/addgood',{
+        typeid:type.Id,
+        userid:localStorage.getItem('userid'),
+        name:localStorage.getItem('name')
+          })
+          .then((res) => {
+            console.log(res);
+          })
+       }
+      
     }
   }
 }
