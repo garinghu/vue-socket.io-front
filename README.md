@@ -26,3 +26,6 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## 发表动态及点赞页面
 ![Alt text](http://106.15.228.215:8080/Blog/images/1514018398263.gif)
+
+## 发表评论功能
+![Alt text](http://106.15.228.215:8080/Blog/images/1514208097835.gif)
