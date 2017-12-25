@@ -43,17 +43,17 @@
           </div>
 
           <div class="exchange">
-            <img src="../../assets/svg/commit.svg" alt="" @click='addCommit(item,index)'>
+            <img src="../../assets/svg/commit.svg" alt="" >
             <img :src="item.gooded?goodSelect:good" alt="" @click='addGood(item,index)'>
           </div>
 
           <div class="goods">
             <img src="../../assets/svg/goods.svg" alt="">
-            <span v-for="(good, index) in item.good" :key="good.Id">{{ good.name }}，</span>
+            <span v-for="(good, goodindex) in item.good" :key="good.Id">{{ good.name }}，</span>
           </div>
 
           <div class="commit">
-            <input type="text" placeholder="评论">
+            <input type="text" placeholder="评论" @keydown='addCommit(item,index)'>
           </div>
 
         </li>
@@ -146,22 +146,23 @@ export default {
       
     },
     addCommit (type, index) {
-       if(!this.myTypeList[index].gooded){
-         this.myTypeList[index].gooded = true;
-         this.myTypeList[index].good.push({
-           name: localStorage.getItem('name'),
-           userid: localStorage.getItem('userid')
-         })
-          Axios.post('http://localhost:3000/addgood',{
-        typeid:type.Id,
-        userid:localStorage.getItem('userid'),
-        name:localStorage.getItem('name')
+      if(event.keyCode==13){
+       if( event.path[0].value != ''){
+          var timestamp=new Date().getTime();
+          Axios.post('http://localhost:3000/addcommit',{
+            typeid:type.Id,
+            userid:localStorage.getItem('userid'),
+            content:event.path[0].value,
+            date:timestamp,
+            name:localStorage.getItem('name')
           })
           .then((res) => {
-            console.log(res);
+            if(res.data == "成功"){
+              event.path[0].value = ''
+            }
           })
        }
-      
+      } 
     }
   }
 }
