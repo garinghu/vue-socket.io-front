@@ -52,6 +52,15 @@
             <span v-for="(good, goodindex) in item.good" :key="good.Id">{{ good.name }}，</span>
           </div>
 
+          <div class="commits">
+            <ul>
+              <li v-for="(commit, commitindex) in item.commit" :key="commitindex">
+                <span class="username">{{ commit.name }} :</span>
+                <span>{{ commit.content }}</span>
+              </li>
+            </ul>
+          </div>
+
           <div class="commit">
             <input type="text" placeholder="评论" @keydown='addCommit(item,index)'>
           </div>
@@ -106,6 +115,7 @@ export default {
       var y = timestamp.getFullYear(),
         m = timestamp.getMonth() + 1,
         d = timestamp.getDate();
+        console.log("git test")
       return y + '-' + m + '-'  + d; 
     },     
     update(e){
@@ -128,6 +138,7 @@ export default {
       this.$router.push({path:'/addtype'})
     },
     addGood (type, index) {
+      console.log(this.myTypeList[index])
        if(!this.myTypeList[index].gooded){
          this.myTypeList[index].gooded = true;
          this.myTypeList[index].good.push({
@@ -148,7 +159,8 @@ export default {
     addCommit (type, index) {
       if(event.keyCode==13){
        if( event.path[0].value != ''){
-          var timestamp=new Date().getTime();
+          var content = event.path[0].value
+          var timestamp = new Date().getTime();
           Axios.post('http://localhost:3000/addcommit',{
             typeid:type.Id,
             userid:localStorage.getItem('userid'),
@@ -158,9 +170,14 @@ export default {
           })
           .then((res) => {
             if(res.data == "成功"){
-              event.path[0].value = ''
+               this.myTypeList[index].commit.push({
+                  content: content,
+                  name: localStorage.getItem('name'),
+                  userid:localStorage.getItem('userid')
+               })
             }
           })
+        event.path[0].value = ''   
        }
       } 
     }
@@ -267,6 +284,13 @@ ul{
 .goods img{
   /* margin-top: 0.1rem; */
   vertical-align: middle;
+}
+.commits{
+  padding:0.2rem 0.5rem;
+}
+.commits .username{
+  color:#303133;
+  font-weight: bold;
 }
 .commit{
   padding:0.2rem 0.5rem;
