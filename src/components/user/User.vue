@@ -115,7 +115,7 @@ export default {
       var y = timestamp.getFullYear(),
         m = timestamp.getMonth() + 1,
         d = timestamp.getDate();
-        console.log("git test")
+        console.log("git test 2")
       return y + '-' + m + '-'  + d; 
     },     
     update(e){
